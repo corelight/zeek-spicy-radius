@@ -5,11 +5,10 @@ module Zeek_zeek_spicy_radius;
 import zeek_spicy_radius;
 import zeek;
 
-# TODO: For DPD, protocol analyzers should confirm or reject a protocol.
-# on zeek_spicy_radius::Radius::%done {
-#     zeek::confirm_protocol();
-# }
-#
-# on zeek_spicy_radius::Radius::%error {
-#     zeek::reject_protocol("error while parsing Radius record");
-# }
+on zeek_spicy_radius::Radius::%done {
+    zeek::confirm_protocol();
+}
+
+on zeek_spicy_radius::Radius::%error {
+    zeek::reject_protocol("error while parsing Radius record");
+}

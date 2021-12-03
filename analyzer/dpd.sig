@@ -1,7 +1,11 @@
-# TODO: Use this file to optionally declare signatures which can be used to activate your analyzers.
-#
-# signature dpd_Radius {
-#     ip-proto == tcp
-#     payload /^\x11\x22\x33\x44/
-#     enable "spicy_Radius"
-# }
+signature dpd_Radius_client {
+    ip-proto == udp
+    payload /^\x01/
+}
+
+signature dpd_Radius_server {
+    ip-proto == udp
+    payload /^(\x02|\x03|\x11)/
+    requires-reverse-signature dpd_Radius_client
+    enable "spicy_Radius"
+}

@@ -1,7 +1,29 @@
-# TODO: Define your analyzers here.
-
 module zeek_spicy_radius;
 
+public type CodeType = enum {
+    ACCESS_REQUEST = 1,
+    ACCESS_ACCEPT = 2,
+    ACCESS_REJECT = 3,
+    ACCOUNTING_REQUEST = 4,
+    ACCOUNTING_RESPONSE = 5,
+    ACCESS_CHALLENGE = 11,
+    STATUS_SERVER = 12,
+    STATUS_CLIENT = 13,
+    RESERVED = 255,
+};
+
 public type Radius = unit {
-    payload: bytes &eod;
+    code: uint8 &convert=CodeType($$);
+    id: uint8;
+    len: uint16;
+    auth: bytes &size=16;
+    attibvals: AttribVal[] &eod;
+#    payload: bytes &eod;
+};
+
+public type AttribVal = unit {
+    # type
+    t: uint8;
+    len: uint8;
+    value: bytes &size=self.len-2;
 };

@@ -1,25 +1,12 @@
-# TODO: Adjust here whether this is a file, tcp or ucp analyzer,
-# and the ports the analyzers work on. See
-# https://docs.zeek.org/projects/spicy/en/latest/zeek.html#interface-definitions-evt-files
-# for the DSL used here. Below, the active analyzer declaration defines a protocol analyzer.
-#
-# A file analyzer would be define like this:
-#
-#     file analyzer spicy::ZIP:
-#         parse with ZIP::Archive,
-#         mime-type application/zip;
-#
-# A packet analyzer would look like this:
-
-#     packet analyzer spicy::RawLayer:
-#         parse with Raw Layer::Packet;
-
-protocol analyzer spicy::Radius over TCP:
+protocol analyzer spicy::Radius over UDP:
     parse with zeek_spicy_radius::Radius,
-    port 8080/tcp;
+    replaces RADIUS;
 
 import zeek_spicy_radius;
 import Zeek_zeek_spicy_radius;
 
-# TODO: Connect Spicy-side events with Zeek-side events.
-on zeek_spicy_radius::Radius -> event Radius::message($conn, $is_orig, self.payload);
+on zeek_spicy_radius::Radius -> event Radius::message($conn, $is_orig, 
+                                                      self.code, self.id);
+
+on zeek_spicy_radius::AttribVal -> event Radius::attribval($conn, $is_orig, 
+                                                           self.t, self.value);
