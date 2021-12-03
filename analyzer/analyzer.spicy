@@ -1,0 +1,7 @@
+# TODO: Define your analyzers here.
+
+module zeek_spicy_radius;
+
+public type Radius = unit {
+    payload: bytes &eod;
+};
