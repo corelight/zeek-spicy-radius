@@ -1,5 +1,8 @@
 # zeek-spicy-radius
 
+This is a Spicy protocol analyzer for Radius that will replace the core
+Radius analyzer.  This was written mainly to support a webinar.
+
 RFCs:
 
 - https://datatracker.ietf.org/doc/html/rfc2865#section-3
