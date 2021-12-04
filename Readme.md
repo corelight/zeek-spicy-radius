@@ -1,7 +1,9 @@
 # zeek-spicy-radius
 
 This is a Spicy protocol analyzer for Radius that will replace the core
-Radius analyzer.  This was written mainly to support a webinar.
+Radius analyzer.  This was written mainly to support this webinar:
+
+https://zeek.org/2021/12/03/zeek-in-action-video-10-radius-protocol-analyzer-with-spicy/
 
 RFCs:
 
