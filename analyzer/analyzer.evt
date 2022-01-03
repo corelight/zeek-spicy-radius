@@ -1,5 +1,5 @@
 protocol analyzer spicy::Radius over UDP:
-    parse with zeek_spicy_radius::Radius,
+    parse with zeek_spicy_radius::RadiusMessages,
     replaces RADIUS;
 
 import zeek_spicy_radius;
